@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Buttons</title>
+        <!--
+            the tags had no closing tag like <link>
+            are called void element.
+        -->
+        <link rel="stylesheet" href="buttons.css">
+        <link rel="stylesheet" href="styles/button.css">
+    </head>
+
+    <body>
+        <button>SUBSCRIBE</button>
+        <button class="subscribe-button">SUBSCRIBE</button>
+        <button class="join-button">JOIN</button>
+        <button class="tweet-button">Tweet</button>
+        <!-- 根据 CSS Box Model 设置 height 和 width 并不合适，参考下面 button tag -->
+        <button class="join-button-no-padding">JOIN without padding setting</button>
+        <button class="join-button-padding">JOIN with padding setting</button>
+    </body>
+</html>

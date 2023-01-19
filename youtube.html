@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<!--
+    html has 3 element:
+    1. block element which takes up the entire line
+    2. inline-block element which takes up as much space as needed
+    3. inline element which appears within a line of text
+-->
+<!--
+    about div element:
+    - div element(division) which is just a box.
+    - div can contain any other elements inside.
+    - div is meant to be container which can manage element by group.
+-->
+<!--
+    the following is vertical layout:
+    <div></div>
+    <div></div>
+
+    the following is horizon layout:
+    <div style="display:inline-block"></div>
+    <div style="display:inline-block"></div>
+-->
+<html>
+    <head>
+        <style>
+            p {
+                margin-top: 0;
+                margin-bottom: 0;
+            }
+
+            body {
+                margin: 0;
+                padding-top: 40px;
+                padding-left: 80px;
+            }
+
+
+
+
+            .thumbnail {
+                width: 100%;
+                /*
+                width: 300px;
+                height: 300px;
+                object-fit: contain;
+                object-position: top;
+                display: block;
+                */
+                
+            }
+
+            .video-author,
+            .video-stats {
+                font-size: 12px;
+                color: rgb(96, 96, 96);
+            }
+
+            .video-author {
+                margin-bottom: 4px;
+            }
+
+            .video-title {
+                margin-top: 0;
+                font-weight: 500;
+                line-height: 20px;
+                margin-bottom: 12px;
+            }
+
+            .video-preview {
+                /*
+                width: 300px;
+                display: inline-block;
+                */
+            }
+
+
+
+            .channel-pic {
+                display: inline-block;
+                width: 50px;
+                vertical-align: top;
+            }
+
+            .video-info {
+                display: inline-block;
+                /*width: 250px;*/
+            }
+
+            .profile-pic {
+                width: 36px;
+                border-radius: 25px;
+            }
+
+            .thumbnail-row {
+                margin-top: 12px;
+                position: relative;
+            }
+
+            .video-info-grid {
+                display: grid;
+                grid-template-columns: 50px 1fr;
+            }
+
+            .video-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                column-gap: 16px;
+                row-gap: 40px;
+
+                text-decoration: underline; /* inherite by the sub-element */
+                border: 2px solid red;    /* cannot inherite by the sub-element */
+            }
+
+            @media (max-width: 800px) {
+                .video-grid {
+                    grid-template-columns: 1fr 1fr;
+                }
+            }
+
+            @media (min-width: 801px) and (max-width: 1200px) {
+                .video-grid {
+                    grid-template-columns: 1fr 1fr 1fr;
+                }
+            }
+            @media (min-width: 1200px) {
+                .video-grid {
+                    grid-template-columns: 1fr 1fr 1fr 1fr;
+                }
+            }
+
+
+
+            .header {
+                height: 50px;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+
+                background-color: white;
+                border-bottom-width: 1px;
+                border-bottom-style: solid;
+                border-bottom-color: rgb(228, 228, 228);
+
+                /* fix the problem relative position div floating above header */
+                z-index: 100;
+            }   
+
+            .left-section {
+                background-color: lightblue;
+                display: flex;
+                align-items: center;
+            }
+
+            .middle-section {
+                background-color: lightpink;
+                flex: 1;
+                margin-left: 70px;
+                margin-right: 35px;
+                max-width: 900px;
+                display: flex;
+                align-items: center;
+            }
+
+            .right-section {
+                background-color: lightblue;
+                width: 200px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .hamburger-menu {
+                height: 24px;
+                margin-left: 24px;
+                margin-right: 24px;
+            }
+
+            .youtube-logo {
+                height: 20px;
+            }
+
+            .search-button {
+                height: 40px;
+                width: 60px;
+                background-color: rgb(240, 240, 240);
+                border-width: 1px;
+                border-style: solid;
+                border-color: rgb(192, 192, 192);
+                margin-left: -1px;
+                margin-right: 10px;
+            }
+
+            .voice-button {
+                height: 40px;
+                width: 40px;
+                border-radius: 20px;
+                border: none;
+                background-color: rgb(240, 240, 240);
+            }
+
+            .search-bar {
+                flex: 1;
+                height: 36px;
+                padding-left: 10px;
+                font-size: 16px;
+                border-width: 1px;
+                border-style: solid;
+                border-radius: 2px;
+                box-shadow: inset 1px 2px 5px rgba(0, 0, 0, 0.15);
+                border-color: rgb(192, 192, 192);
+            }
+
+            .search-bar::placeholder {
+                font-size: 16px;
+            }
+
+            .search-icon {
+                height: 25px;
+                margin-top: 4px;
+            }
+
+            .voice-icon {
+                height: 24px;
+                margin-top: 4px;
+            }
+
+
+
+            .sidebar {
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                top: 50px;
+                width: 72px;
+                background-color: white;
+            }
+
+
+
+
+            .video-time {
+                background-color: black;
+                color: white;
+                position: absolute;
+                bottom: 10px;
+                right: 5px;
+            }
+
+
+
+
+            .notification-icon-container {
+                position: relative;
+            }
+            .notification-count {
+                position: absolute;
+                top: -2px;
+                right: -5px;
+                background-color: red;
+                color: white;
+                font-size: 10px;
+                padding-left: 6px;
+                padding-right: 6px;
+                padding-top: 2px;
+                padding-bottom: 2px;
+                border-radius: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <div class="left-section">
+                <img class="hamburger-menu" src="icons/hamburger-menu.svg">
+                <img class="youtube-logo" src="icons/youtube-logo.svg">
+            </div>
+            <div class="middle-section">
+                <input class="search-bar" type="text" placeholder="Search">
+                <button class="search-button">
+                    <img class="search-icon" src="icons/hamburger-menu.svg">
+                </button>
+                <button class="voice-button">
+                    <img class="void-icon" src="icons/hamburger-menu.svg">
+                </button>
+            </div>
+            <div class="right-section">
+                <img class="search-icon" src="icons/hamburger-menu.svg">
+                <img class="search-icon" src="icons/hamburger-menu.svg">
+                <div class="notification-icon-container">
+                    <img class="search-icon" src="icons/hamburger-menu.svg">
+                    <div class="notification-count">3</div>
+                </div>
+                <img class="search-icon" src="channel-pics/channel-1.jpeg">
+            </div>
+        </div>
+        
+        <div class="sidebar">sidebar</div>
+
+        <div class="video-grid">
+        <div class="video-preview">
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="thumbnails/thumbnail-1.webp">
+                <div class="video-time">14:20</div>
+            </div>
+            <div class="video-info-grid">
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channel-pics/channel-1.jpeg">
+                </div>
+                <div class="video-info">
+                    <p class="video-title">Talking Tech and AI with Google CEO Sundar Pichai!</p>
+                    <p class="video-author">Marques Brownlee</p>
+                    <p class="video-stats">3.4M views · 6 months ago</p>
+                </div>
+            </div>
+        </div>
+        <div class="video-preview">
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="thumbnails/thumbnail-1.webp">
+            </div>
+            <div class="video-info-grid">
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channel-pics/channel-1.jpeg">
+                </div>
+                <div class="video-info">
+                    <p class="video-title">Talking Tech and AI with Google CEO Sundar Pichai!</p>
+                    <p class="video-author">Marques Brownlee</p>
+                    <p class="video-stats">3.4M views · 6 months ago</p>
+                </div>
+            </div>
+        </div>
+        <div class="video-preview">
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="thumbnails/thumbnail-1.webp">
+            </div>
+            <div class="video-info-grid">
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channel-pics/channel-1.jpeg">
+                </div>
+                <div class="video-info">
+                    <p class="video-title">Talking Tech and AI with Google CEO Sundar Pichai!</p>
+                    <p class="video-author">Marques Brownlee</p>
+                    <p class="video-stats">3.4M views · 6 months ago</p>
+                </div>
+            </div>
+        </div>
+        <div class="video-preview">
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="thumbnails/thumbnail-1.webp">
+            </div>
+            <div class="video-info-grid">
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channel-pics/channel-1.jpeg">
+                </div>
+                <div class="video-info">
+                    <p class="video-title">Talking Tech and AI with Google CEO Sundar Pichai!</p>
+                    <p class="video-author">Marques Brownlee</p>
+                    <p class="video-stats">3.4M views · 6 months ago</p>
+                </div>
+            </div>
+        </div>
+        <div class="video-preview">
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="thumbnails/thumbnail-1.webp">
+            </div>
+            <div class="video-info-grid">
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channel-pics/channel-1.jpeg">
+                </div>
+                <div class="video-info">
+                    <p class="video-title">Talking Tech and AI with Google CEO Sundar Pichai!</p>
+                    <p class="video-author">Marques Brownlee</p>
+                    <p class="video-stats">3.4M views · 6 months ago</p>
+                </div>
+            </div>
+        </div>
+        <div class="video-preview">
+            <div class="thumbnail-row">
+                <img class="thumbnail" src="thumbnails/thumbnail-1.webp">
+            </div>
+            <div class="video-info-grid">
+                <div class="channel-pic">
+                    <img class="profile-pic" src="channel-pics/channel-1.jpeg">
+                </div>
+                <div class="video-info">
+                    <p class="video-title">Talking Tech and AI with Google CEO Sundar Pichai!</p>
+                    <p class="video-author">Marques Brownlee</p>
+                    <p class="video-stats">3.4M views · 6 months ago</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+</html>
